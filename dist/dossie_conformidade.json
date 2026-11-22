@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-12T01:25:28.634036+00:00",
+  "timestamp": "2026-11-22T12:49:10.013499+00:00",
   "standard_compliance": [
     "SLSA v1.0 Level 2",
     "NIST SP 800-218 (SSDF)",
@@ -9,23 +9,42 @@
   "evidence_chain": {
     "dependency_lockfile": {
       "path": "src/package-lock.json",
-      "sha256": "1fffa39a01fe295353789258ee58186dc51780a1143d2bbb122800a27da248d4",
+      "sha256": "43f819d8fc947007e655d8a337bda00fe453d24910a349fe065a38a11fdeed1c",
       "status": "PINNED_DETERMINISTIC"
     },
     "sbom": {
       "format": "CycloneDX 1.6 JSON",
-      "sha256": "f768e87a4db1e8d1785d6a02adbd69b42ea75165879ba650157e8acd681c27f0",
+      "sha256": "fd261ce12f93b7d5d9da9488c4010b0c0f2a12afb4831cfb4b0fc91f3feb9c9c",
       "status": "ATTACHED_TO_OCI_REGISTRY"
     },
     "openvex": {
+      "source_file": "attestations/vex_customizado.openvex.json",
       "specification": "OpenVEX v0.2.0",
-      "justification": "code_not_reachable",
+      "statements_count": 3,
+      "cves_triaged": [
+        "CVE-2022-24999",
+        "CVE-2020-28500",
+        "CVE-2024-29041"
+      ],
+      "justifications": [
+        "code_not_reachable",
+        "vulnerable_code_cannot_be_controlled_by_adversary",
+        "vulnerable_code_not_in_execute_path"
+      ],
+      "sha256": "a7ee80711c54bf2c26cc7a295c2006de1fe4dd524d665dec5a3997ec068c82b0",
       "status": "ATTESTED_IN_TOTO"
     },
     "slsa_provenance": {
       "specification": "SLSA Provenance v1.0",
       "builder": "https://github.com/actions/runner/slsa-builder-l2",
+      "sha256": "0fbfe2d6ea35e66c98974f4c40969b4428abc446a085ec1fa2f19bd9476600c1",
       "status": "ATTESTED_IN_TOTO"
+    },
+    "policy_as_code": {
+      "policy_file": "policies/openvex_audit.rego",
+      "engine": "Open Policy Agent / Conftest (Rego v1)",
+      "sha256": "5142ab21557b7b9c65b83957241e17f17fcb910c98685e1745cb4ac8f876bc9a",
+      "status": "ENFORCED"
     }
   }
 }
