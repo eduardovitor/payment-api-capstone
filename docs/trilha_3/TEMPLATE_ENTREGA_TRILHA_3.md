@@ -1,12 +1,12 @@
 # Relatório de Evidências Cloud-Native — Projeto Final Capstone (Trilha 3)
 
-**Nome do Aluno(a):** [Seu Nome Completo]  
+**Nome do Aluno(a):** Eduardo Vitor Vieira Torres 
 **Turma:** Supply Chain Security (Turma 1746)  
 **Trilha Escolhida:** Trilha 3 — Engenharia de Esteira em Nuvem & Keyless OIDC *(Tempo-alvo: ~95 min | Teto: 2h)*  
-**Data:** [DD/MM/AAAA]
+**Data:** 22/11/2026
 
 - **Modalidade de Entrega:**
-  - `[ ] Trilha Única` *(primeira trilha entregue — responder também ao **Bloco Express** no final)*
+  - `[ X ] Trilha Única` *(primeira trilha entregue — responder também ao **Bloco Express** no final)*
   - `[ ] Modo Incremental` *(já entreguei trilha anterior — **Bloco Express dispensado**; reutilizando `vex_customizado.openvex.json` e `openvex_audit.rego`)*
 
 ---
@@ -15,8 +15,8 @@
 - **Repositório Público no GitHub:** `https://github.com/eduardovitor/payment-api-capstone`
 - **Run Bloqueada pelo Conftest (`FAIL` intencional da `GPL-3.0`):** `https://github.com/eduardovitor/payment-api-capstone/actions/runs/45022828038/job/137209269488`
 - **Run Verde Final (Após Remediação):** `https://github.com/eduardovitor/payment-api-capstone/actions/runs/45024107829`
-- **Pacote Público no GHCR:** `ghcr.io/<usuario>/<repositorio>/payment-api@sha256:<digest>`
-- **Registro Público no Rekor (`search.sigstore.dev`):** [Cole aqui o Log Index ou URL da transação no Rekor]
+- **Pacote Público no GHCR:** `ghcr.io/eduardovitor/payment-api-capstone/payment-api`
+- **Registro Público no Rekor (`search.sigstore.dev`):** 4044597151
 
 ---
 
@@ -45,7 +45,7 @@
 ## 3. Verificação Pública Keyless (Fulcio + Rekor) & Atestação OpenVEX — *Aulas 04 & 06* (`3,5 pts`)
 - **Comando público executado (via GitHub Codespaces, CLI local ou container):**
   ```bash
-  cosign verify --certificate-identity="https://github.com/<usuario>/<repositorio>/.github/workflows/golden_pipeline_capstone.yml@refs/heads/main" --certificate-oidc-issuer="https://token.actions.githubusercontent.com" ghcr.io/<usuario>/<repositorio>/payment-api@sha256:<digest>
+ cosign verify --certificate-identity="https://github.com/eduardovitor/payment-api-capstone/.github/workflows/golden_pipeline_capstone.yml@refs/heads/main" --certificate-oidc-issuer="https://token.actions.githubusercontent.com" ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:406f4f9c7cdb4acef4203b647835aabbc667d1be748ae2126c03a3b203a5a0c0
   ```
 - **Saída real do `cosign verify` e `cosign verify-attestation --type openvex`:**
   ```text
