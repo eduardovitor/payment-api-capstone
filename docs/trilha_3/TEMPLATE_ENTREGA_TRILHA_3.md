@@ -14,7 +14,7 @@
 ## 1. Links Oficiais da Entrega — *Aula 08* (`1,5 pts`)
 - **Repositório Público no GitHub:** `https://github.com/eduardovitor/payment-api-capstone`
 - **Run Bloqueada pelo Conftest (`FAIL` intencional da `GPL-3.0`):** `https://github.com/eduardovitor/payment-api-capstone/actions/runs/45022828038/job/137209269488`
-- **Run Verde Final (Após Remediação):** `https://github.com/<usuario>/<repositorio>/actions/runs/<id-run-pass>`
+- **Run Verde Final (Após Remediação):** `https://github.com/eduardovitor/payment-api-capstone/actions/runs/45024107829`
 - **Pacote Público no GHCR:** `ghcr.io/<usuario>/<repositorio>/payment-api@sha256:<digest>`
 - **Registro Público no Rekor (`search.sigstore.dev`):** [Cole aqui o Log Index ou URL da transação no Rekor]
 
@@ -38,7 +38,7 @@
   2 tests, 1 passed, 0 warnings, 1 failure, 0 exceptions
   Error: Process completed with exit code 1.
   ```
-- **Commit da remediação (remoção de `gpl-math-lib`):** `<hash-do-commit>`
+- **Commit da remediação (remoção de `gpl-math-lib`):** `91f4da64c002d589adf7036498499061613c5ba9`
 
 ---
 
