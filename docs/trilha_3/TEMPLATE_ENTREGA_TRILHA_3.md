@@ -12,8 +12,8 @@
 ---
 
 ## 1. Links Oficiais da Entrega — *Aula 08* (`1,5 pts`)
-- **Repositório Público no GitHub:** `https://github.com/<usuario>/<repositorio>`
-- **Run Bloqueada pelo Conftest (`FAIL` intencional da `GPL-3.0`):** `https://github.com/<usuario>/<repositorio>/actions/runs/<id-run-fail>`
+- **Repositório Público no GitHub:** `https://github.com/eduardovitor/payment-api-capstone`
+- **Run Bloqueada pelo Conftest (`FAIL` intencional da `GPL-3.0`):** `https://github.com/eduardovitor/payment-api-capstone/actions/runs/45022828038/job/137209269488`
 - **Run Verde Final (Após Remediação):** `https://github.com/<usuario>/<repositorio>/actions/runs/<id-run-pass>`
 - **Pacote Público no GHCR:** `ghcr.io/<usuario>/<repositorio>/payment-api@sha256:<digest>`
 - **Registro Público no Rekor (`search.sigstore.dev`):** [Cole aqui o Log Index ou URL da transação no Rekor]
@@ -27,7 +27,16 @@
   - `[ ] policies/openvex_audit.rego e attestations/vex_customizado.openvex.json sem TODOs pendentes`
 - **Log do bloqueio inicial da `gpl-math-lib` pelo Conftest na run vermelha:**
   ```text
-  [Cole aqui o trecho do log do GitHub Actions mostrando o FAIL do Conftest na licença GPL-3.0]
+  Run mkdir -p dist
+  [info] checking github for release tag='v1.19.0' 
+  [info] fetching release script for tag='v1.19.0' 
+  [info] checking github for release tag='v1.19.0' 
+  [info] using release tag='v1.19.0' version='1.19.0' os='linux' arch='amd64' 
+  [info] installed /usr/local/bin/syft 
+  FAIL - dist/sbom.cdx.json - main - VIOLACAO DE LICENCA: O componente 'gpl-math-lib@1.0.0' possui licenca proibida 'GPL-3.0-only'. Remova ou substitua a dependencia.
+
+  2 tests, 1 passed, 0 warnings, 1 failure, 0 exceptions
+  Error: Process completed with exit code 1.
   ```
 - **Commit da remediação (remoção de `gpl-math-lib`):** `<hash-do-commit>`
 
