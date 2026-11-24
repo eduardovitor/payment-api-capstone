@@ -82,5 +82,13 @@ The following checks were performed on each of these signatures:
 ## 5. Bloco Express Conceitual — *Aulas 01 & 02* (`1,0 pt`)
 *(Dispensado automaticamente caso você marque a opção **Modo Incremental** no cabeçalho acima!)*
 
-1. **SLSA v1.0 / NIST SSDF:** Por que o build executado no GitHub Actions com `id-token: write` e registro no Rekor atende a garantias superiores às de um build manual local? [...]
-2. **Proteção contra Dependency Confusion:** Qual a função do arquivo `src/.npmrc` e da flag `npm install --ignore-scripts` executada na esteira? [...]
+1. **SLSA v1.0 / NIST SSDF:** Por que o build executado no GitHub Actions com `id-token: write` e registro no Rekor atende a garantias superiores às de um build manual local?
+   
+Em um build manual, a assinatura de arquivos do repositório (artefatos) geralmente depende de chaves privadas armazenadas localmente. Para a segurança de build de ambientes automatizados, id-token: write cumpre um papel fundamental que é o de permitir a atuação do Github Actions como provedor OIDC para emissão de um token JWT identificador válido apenas para aquele job específico. Esse token é utilizado posteriormente para gerar um certificado de assinatura digital pela ferramenta Cosign, eliminando a necessidade de gerenciar chaves privadas locais.
+
+Mesmo com assinatura digital automatizada com token efêmero, é necessário ser capaz de conferir os dados da procedência de uma determinada assinatura digital. Nesse sentido, o Rekor é um registro cronológico público imutável de assinaturas digitais geradas pelo Cosign para que qualquer um seja capaz de aferir a validade de determinada assinatura digital.
+   
+2. **Proteção contra Dependency Confusion:** Qual a função do arquivo `src/.npmrc` e da flag `npm install --ignore-scripts` executada na esteira?
+
+Um arquivo .npmrc serve para armazenar configurações personalizadas que controlam como o npm se comporta ao instalar, publicar ou gerenciar pacotes. Ele ajuda a garantir que pacotes de dependência sejam instalados a partir dos escopos corretos (público ou privado), evitando um ataque de dependency confusion. Já o npm install --ignore-scripts, ele faz a instalação de dependências impedindo que qualquer script de ciclo de vida seja executado, prevenindo que possíveis scripts maliciosos injetados sejam executados no projeto.
+   
