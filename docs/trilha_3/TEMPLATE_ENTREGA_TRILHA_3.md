@@ -3,7 +3,7 @@
 **Nome do Aluno(a):** Eduardo Vitor Vieira Torres 
 **Turma:** Supply Chain Security (Turma 1746)  
 **Trilha Escolhida:** Trilha 3 — Engenharia de Esteira em Nuvem & Keyless OIDC *(Tempo-alvo: ~95 min | Teto: 2h)*  
-**Data:** 22/11/2026
+**Data:** 25/11/2026
 
 - **Modalidade de Entrega:**
   - `[ X ] Trilha Única` *(primeira trilha entregue — responder também ao **Bloco Express** no final)*
@@ -22,9 +22,9 @@
 
 ## 2. Hardening da Esteira, Rego v1 & Ciclo Red → Green — *Aulas 02, 03, 05 & 07* (`3,5 pts`)
 - **Correções aplicadas antes do 1º push:**
-  - `[ ] TODO 1 resolvido: id-token: write habilitado em golden_pipeline_capstone.yml`
-  - `[ ] TODO 2 resolvido: actions/setup-node fixado por SHA-1 de 40 caracteres`
-  - `[ ] policies/openvex_audit.rego e attestations/vex_customizado.openvex.json sem TODOs pendentes`
+  - `[ X ] TODO 1 resolvido: id-token: write habilitado em golden_pipeline_capstone.yml`
+  - `[ X ] TODO 2 resolvido: actions/setup-node fixado por SHA-1 de 40 caracteres`
+  - `[ X ] policies/openvex_audit.rego e attestations/vex_customizado.openvex.json sem TODOs pendentes`
 - **Log do bloqueio inicial da `gpl-math-lib` pelo Conftest na run vermelha:**
   ```text
   Run mkdir -p dist
@@ -44,18 +44,30 @@
 
 ## 3. Verificação Pública Keyless (Fulcio + Rekor) & Atestação OpenVEX — *Aulas 04 & 06* (`3,5 pts`)
 - **Comando público executado (via GitHub Codespaces, CLI local ou container):**
-  ```bash
-cosign verify --certificate-identity="https://github.com/eduardovitor/payment-api-capstone/.github/workflows/golden_pipeline_capstone.yml@refs/heads/main" --certificate-oidc-issuer="https://token.actions.githubusercontent.com" ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1
+  ```bash 
+  
+  cosign verify --certificate-identity="https://github.com/eduardovitor/payment-api-capstone/.github/workflows/golden_pipeline_capstone.yml@refs/heads/main" --certificate-oidc-issuer="https://token.actions.githubusercontent.com" ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1
+
   ```
+
 - **Saída real do `cosign verify` e `cosign verify-attestation --type openvex`:**
-  ```text
+  <p>
+    --- cosign verify output--- 
+    
     Verification for ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - Existence of the claims in the transparency log was verified offline
   - The code-signing certificate was verified using trusted certificate authority certificates
 
+
 [{"critical":{"identity":{"docker-reference":"ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1"},"image":{"docker-manifest-digest":"sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1"},"type":"https://openvex.dev/ns"},"optional":{}},{"critical":{"identity":{"docker-reference":"ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1"},"image":{"docker-manifest-digest":"sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1"},"type":"https://cyclonedx.org/bom"},"optional":{}},{"critical":{"identity":{"docker-reference":"ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1"},"image":{"docker-manifest-digest":"sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1"},"type":"https://sigstore.dev/cosign/sign/v1"},"optional":{}}]
+
+</p>
+
+<p> 
+
+--- cosign verify attestation output--- 
 
 Verification for ghcr.io/eduardovitor/payment-api-capstone/payment-api@sha256:e9aacb7898b2d345c58c142e27793152c6276dc96e234fae67de820264b3e4a1 --
 The following checks were performed on each of these signatures:
@@ -63,19 +75,30 @@ The following checks were performed on each of these signatures:
   - Existence of the claims in the transparency log was verified offline
   - The code-signing certificate was verified using trusted certificate authority certificates
 {"payload":"eyJfdHlwZSI6Imh0dHBzOi8vaW4tdG90by5pby9TdGF0ZW1lbnQvdjAuMSIsICJzdWJqZWN0IjpbeyJuYW1lIjoiZ2hjci5pby9lZHVhcmRvdml0b3IvcGF5bWVudC1hcGktY2Fwc3RvbmUvcGF5bWVudC1hcGkiLCAiZGlnZXN0Ijp7InNoYTI1NiI6ImU5YWFjYjc4OThiMmQzNDVjNThjMTQyZTI3NzkzMTUyYzYyNzZkYzk2ZTIzNGZhZTY3ZGU4MjAyNjRiM2U0YTEifX1dLCAicHJlZGljYXRlVHlwZSI6Imh0dHBzOi8vb3BlbnZleC5kZXYvbnMiLCAicHJlZGljYXRlIjp7IkBjb250ZXh0IjoiaHR0cHM6Ly9vcGVudmV4LmRldi9ucy92MC4yLjAiLCAiQGlkIjoiaHR0cHM6Ly9lbXByZXNhLmNvcnAuaW50ZXJuYWwvdmV4L3BheW1lbnQtYXBpLzIwMjYtMTEtMTgiLCAiYXV0aG9yIjoiU2VjT3BzICYgU3VwcGx5IENoYWluIERlZmVuc2UgQ29tbWl0dGVlIDxzZWNvcHNAZW1wcmVzYS5jb3JwLmludGVybmFsPiIsICJzdGF0ZW1lbnRzIjpbeyJpbXBhY3Rfc3RhdGVtZW50IjoiQSBmdW5jYW8gcXMgdnVsbmVyYXZlbCBuYW8gZSBpbnZvY2FkYSBwZWxhcyByb3RhcyBIVFRQIGRhIGFwbGljYWNhbyBwYXltZW50LWFwaS4gTyBwYXJzZXIgY3VzdG9taXphZG8gZGUgSlNPTiBpc29sYSBjb21wbGV0YW1lbnRlIG9zIHBhcmFtZXRyb3MuIiwgImp1c3RpZmljYXRpb24iOiJjb2RlX25vdF9yZWFjaGFibGUiLCAicHJvZHVjdHMiOlt7IkBpZCI6InBrZzpucG0vZXhwcmVzc0A0LjE4LjIifV0sICJzdGF0dXMiOiJub3RfYWZmZWN0ZWQiLCAidnVsbmVyYWJpbGl0eSI6eyJkZXNjcmlwdGlvbiI6IlZ1bG5lcmFiaWxpZGFkZSBkZSBQcm90b3R5cGUgUG9sbHV0aW9uIG5hIGJpYmxpb3RlY2EgcXMvZXhwcmVzcyIsICJuYW1lIjoiQ1ZFLTIwMjItMjQ5OTkifX0sIHsiaW1wYWN0X3N0YXRlbWVudCI6IkEgYXBsaWNhY2FvIGNvbnNvbWUgZXhjbHVzaXZhbWVudGUgbWV0b2RvcyBkZSBjb2xlY2FvIChsb2Rhc2guZ2V0LCBsb2Rhc2gubWVyZ2UpIHNlbSBtYW5pcHVsYWNhbyBkZSBzdHJpbmdzIHBvciB0ZW1wbGF0ZXMuIiwgImp1c3RpZmljYXRpb24iOiJ2dWxuZXJhYmxlX2NvZGVfY2Fubm90X2JlX2NvbnRyb2xsZWRfYnlfYWR2ZXJzYXJ5IiwgInByb2R1Y3RzIjpbeyJAaWQiOiJwa2c6bnBtL2xvZGFzaEA0LjE3LjIwIn1dLCAic3RhdHVzIjoibm90X2FmZmVjdGVkIiwgInZ1bG5lcmFiaWxpdHkiOnsiZGVzY3JpcHRpb24iOiJSZURvUyBlbSBsb2Rhc2gudGVtcGxhdGUiLCAibmFtZSI6IkNWRS0yMDIwLTI4NTAwIn19LCB7ImltcGFjdF9zdGF0ZW1lbnQiOiJPIG1pY3Jvc3NlcnZpY28gZXhww7VlIGFwZW5hcyBlbmRwb2ludHMgUkVTVCBKU09OIGUgbsOjbyB1dGlsaXphIHJlcy5yZWRpcmVjdCBjb20gcGFyw6JtZXRyb3MgZG8gdXN1w6FyaW8uIiwgImp1c3RpZmljYXRpb24iOiJ2dWxuZXJhYmxlX2NvZGVfbm90X2luX2V4ZWN1dGVfcGF0aCIsICJwcm9kdWN0cyI6W3siQGlkIjoicGtnOm5wbS9leHByZXNzQDQuMTguMiJ9XSwgInN0YXR1cyI6Im5vdF9hZmZlY3RlZCIsICJ2dWxuZXJhYmlsaXR5Ijp7ImRlc2NyaXB0aW9uIjoiT3BlbiBSZWRpcmVjdCBlbSB2ZXJzb2VzIGFudGVyaW9yZXMgZG8gRXhwcmVzcy5qcyBhbyBwYXNzYXIgVVJMcyBuYW8gY29uZmlhdmVpcyBlbSByZXMucmVkaXJlY3QoKSIsICJuYW1lIjoiQ1ZFLTIwMjQtMjkwNDEifX1dLCAidGltZXN0YW1wIjoiMjAyNi0xMS0xOFQxMjowMDowMFoiLCAidG9vbGluZyI6Ik9wZW5WRVggdjAuMi4wIC8gQ29zaWduIEF0dGVzdCB2Mi40IiwgInZlcnNpb24iOjF9fQ==","payloadType":"application/vnd.in-toto+json","signatures":[{"sig":"MEYCIQCluY6ZrCrOJ36S0Dlvyd/P08gir5bglobcFNfC4LS8OQIhALPQsSIUJqAXANCKjrJUF517wNROHjqLj1NLax71K5Ch"}]}
-  ```
 
----
+</p>
 
 ## 4. Artifacts & Self-Check — *Aula 08* (`0,5 pt`)
 - **Artifacts baixados da aba Summary da run verde (`supply-chain-evidence-bundle`):**
-  - `[ ] dist/sbom.cdx.json`
-  - `[ ] dist/dossie_conformidade.json`
-  - `[ ] attestations/vex_customizado.openvex.json`
+  - `[ X ] dist/sbom.cdx.json`
+  - `[ X ] dist/dossie_conformidade.json`
+  - `[ X ] attestations/vex_customizado.openvex.json`
 - **Saída do `python3 tools/selfcheck_capstone.py --trilha 3`:**
-  ```text
-  [Cole aqui o resultado do selfcheck --trilha 3]
-  ```
+  <p>
+ SELF-CHECK CAPSTONE v2 — TRILHA 3
+  [PASS] Nenhuma chave privada 'cosign.key' exposta na raiz.
+
+VALIDANDO TRILHA 3 (CI/CD NUVEM & KEYLESS OIDC | <= 2h)
+  [PASS] Todas as 6 GitHub Actions estao fixadas por SHA-1 de 40 caracteres.
+  [PASS] Permissao ativa 'id-token: write' configurada para Cosign Keyless OIDC.
+  [PASS] Mock corporativo src/node_modules/@corp/payment-vault preservado para CI/CD.
+  [PASS] 'gpl-math-lib' removida de src/package.json (pronto para run verde).
+  [PASS] attestations/vex_customizado.openvex.json valido (3 statement(s) sem TODOs pendentes).
+  [PASS] policies/openvex_audit.rego valido com 'import rego.v1' e 2 regra(s) 'deny contains' ativa(s).
+  [PASS] TEMPLATE_ENTREGA_TRILHA_3.md preenchido (Trilha Unica).
+[RESULTADO] Verificacao estrutural concluida sem erros criticos!
+
+</p>
 
 ---
 
